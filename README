@@ -1,0 +1,56 @@
+
+
+   +------------------------------------------+
+   | IUT le Havre                             |
+   | TP à rendre le 5/1/15                    |
+   | écrit et codé par Antoine CHAUVIN INFOB1 |
+   +------------------------------------------+
+
+Quels outils j'ai utilisé?
+- ubuntu 14.04
+- jenv 0.1.0
+- scala 2.11.2
+- oracle jdk 1.8.0_11-b12
+- vim 7.4
+- les fichiers de configuration https://github.com/Blackrush/dotfiles
+
+
+================
+COMMENT COMPILER
+
+Lancez la commande
+$ scalac mnchrm.scala
+
+
+================
+COMMENT EXÉCUTER
+
+Lancez la commande
+$ scala mnchrm.scala
+
+Ou alors, si vous avez préalablement compilé le fichier `mnchrm.scala`
+$ scala App
+
+
+==================
+COMMENT CONFIGURER
+
+Vous devrez modifier les variables dans la méthodes `main` de `object App`.
+C'est normalement la dernière méthode disponible.
+
+
+=======================
+COMMENT INSTALLER SCALA
+
+Personnellement, j'utilise https://github.com/linux-china/jenv qui permet également
+de gérer d'autres utilitaires comme Gradle ainsi que leurs versions.
+Autrement, la page http://scala-lang.org/download/ permet de télécharger les derniers
+binaires compilés.
+Je recommande d'utiliser la version 2.11.2.
+
+
+======================
+COMMENT INSTALLER JAVA
+
+Via linux-china/jenv (voir plus haut), ou via http://www.oracle.com/technetwork/java/javase/downloads/index.html.
+Je recommande d'utiliser la version 1.8.0_11-b12.
