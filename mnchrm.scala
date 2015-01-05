@@ -4,6 +4,7 @@
 object App {
   import scala.util.Random
   import scala.collection.parallel.ParSeq
+  import java.util.Scanner
 
   /**
    * Vec represente un vecteur (x, y)
@@ -257,6 +258,15 @@ object App {
     res
   }
 
+  def readStdin[T](msg: String)(implicit conv: String => T): T = {
+    System.err.print(s"(input) $msg")
+    
+    val scanner = new Scanner(System.in)
+    val input = scanner.nextLine()
+
+    conv(input)
+  }
+
   /**
    * Point d'entree du programme
    */
@@ -265,7 +275,12 @@ object App {
     /**
      * Utilise une instance implicite de Random
      */
+    // import scala.language.implicitConversions
     implicit val rand = new Random
+    // implicit def stoi(s: String): Int = Integer.parseInt(s)
+    // implicit def stod(s: String): Double = java.lang.Double.parseDouble(s)
+    implicit val stoi = Integer.parseInt(_: String)
+    implicit val stod = java.lang.Double.parseDouble(_: String)
 
     /**
      * Comment se servir d'une matrice
@@ -289,12 +304,9 @@ object App {
      * TP à rendre 5/1/15
      */
     // on definis quelques constantes
-    val precision = 10000
-    val taille    = 10
-    val z         = 1.96
-    println(s"precision=$precision")
-    println(s"taille=$taille")
-    println(s"z=$z")
+    val precision = readStdin[Int]("precision=")
+    val taille    = readStdin[Int]("taille=")
+    val z         = readStdin[Double]("z=")
 
     // on genere un echantillon
     val echantillon = chrono(convergeances(precision, taille))
