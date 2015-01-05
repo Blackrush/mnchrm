@@ -25,6 +25,11 @@ object App {
    * Mat represente une matrice (M, N)
    */
   class Mat(elems: Seq[Seq[Int]]) { mat =>
+    val rows: Int = elems.length
+    val cols: Int = elems(0).length
+
+    elems forall {_.length == mat.cols}
+
     /**
      * Loc represente un point precis (a, b) de la matrice
      */
@@ -103,6 +108,29 @@ object App {
      */
     def multiply(x: Int) = this map { loc => ~loc * x }
     def *(x: Int) = multiply(x)
+
+    def row(i: Int): Stream[Int] = elems(i).to[Stream]
+    def col(j: Int): Stream[Int] =
+      Stream.iterate[Int](0){_+1}
+            .takeWhile{_<elems.length}
+            .map{x => elems(x)(j)}
+
+    /**
+     * Multiplie deux matrices et retourne le resultat
+     */
+    def multiply(that: Mat) =
+      if (this.cols != that.rows || this.rows != that.cols) {
+        throw new IllegalArgumentException("those matrices are not multipliable")
+      } else {
+        val newElems: Seq[Seq[Int]] =
+          for (i <- 0 until this.rows) yield
+          for (j <- 0 until that.cols) yield
+            (this.row(i), that.col(j)).zipped map {_*_} reduce {_+_}
+
+        new Mat(newElems)
+      }
+
+    def *(that: Mat) = multiply(that)
 
     /**
      * Genere une representation humaine de la matrice
@@ -229,8 +257,19 @@ object App {
      * Comment se servir d'une matrice
      */
     val u = Mat.unit(3)
-    println(u * 2)
 
+    /*
+     * [[2 0 0]
+     *  [0 2 0]
+     *  [0 0 2]]
+     */
+    println(u * 2)
+    /**
+     * [[1 0 0]
+     *  [0 1 0]
+     *  [0 0 1]]
+     */
+    println(u * u)
 
     /**
      * TP à rendre 5/1/15
