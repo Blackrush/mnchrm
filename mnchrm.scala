@@ -244,6 +244,20 @@ object App {
   }
 
   /**
+   * Chronometre une operation, affiche le resultat sur stderr
+   */
+  def chrono[T](fn: => T): T = {
+    val start = System.currentTimeMillis
+    val res = fn
+    val end = System.currentTimeMillis
+
+    val ms = (end - start)
+    System.err.println(s"elapsed $ms ms")
+
+    res
+  }
+
+  /**
    * Point d'entree du programme
    */
   def main(args: Array[String]): Unit = {
@@ -283,7 +297,7 @@ object App {
     println(s"z=$z")
 
     // on genere un echantillon
-    val echantillon = convergeances(precision, taille)
+    val echantillon = chrono(convergeances(precision, taille))
 
     // et on fait toutes les stats!
     // merci wikipedia :o)
