@@ -1,6 +1,13 @@
+ANTOINE CHAUVIN INFOB1
+
 1) Au bout d'un certain nombre d'itérations, le tableau semble se stabiliser.
    C'est-à-dire que les valeurs du tableau tendent à être strictement égales entre elles.
 
-2)
+2) Le tableau forme alors une seule couleur monochrome.
 
 3) voir `mnchrm.scala`
+
+   Résultats pour `precision=1000`, `taille=10`, et `z=1.96`
+         moyenne=235.845
+         ecart-type=129.54957378188118
+         intervalle=[227.0,244.0]
