@@ -240,7 +240,7 @@ object App {
    */
   def intervalleConfiance(mean: Double, sigma: Double, n: Int, z: Double): (Double, Double) = {
     val delta = z * sigma / math.sqrt(n)
-    (mean - delta, mean + delta)
+    (math.floor(mean - delta), math.ceil(mean + delta))
   }
 
   /**
@@ -275,7 +275,7 @@ object App {
      * TP à rendre 5/1/15
      */
     // on definis quelques constantes
-    val precision = 1000
+    val precision = 10000
     val taille    = 10
     val z         = 1.96
     println(s"precision=$precision")
